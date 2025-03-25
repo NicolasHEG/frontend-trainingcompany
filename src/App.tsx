@@ -5,9 +5,11 @@ function App() {
   return (
     <>
       <nav>
+        {/* Link is used to navigate between routes */}
         <Link to="/">Customers</Link>
         <Link to="/trainings">Trainings</Link>
       </nav>
+      {/* Outlet is used to render child routes */}
       <Outlet />
     </>
   )

@@ -7,10 +7,12 @@ import TrainingList from './components/TrainingList.tsx'
 
 const router = createBrowserRouter([
   {
+    // The root path ("/") renders the App component as the main layout.
     path: "/",
     element: <App />,
     children: [
       {
+        // The default child route renders the CustomerList component.
         element: <CustomerList />,
         index: true
       },
