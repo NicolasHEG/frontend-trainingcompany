@@ -1,34 +1,24 @@
 import { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry, ColDef, themeMaterial } from 'ag-grid-community';
+import { Customer } from '../types';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
-type Customer = {
-    firstname: string;
-    lastname: string;
-    streetaddress: string;
-    postcode: string;
-    city: string;
-    email: string;
-    phone: string;
-};
-
 export default function CustomerList() {
-
     const [customers, setCustomers] = useState([]);
 
-    const [columnDefs] = useState<ColDef<Customer>[]>([
-		{ field: 'firstname', filter: true },
-		{ field: 'lastname', width: 150, filter: true },
-		{ field: 'streetaddress', width: 150, filter: true },
-		{ field: 'postcode', width: 120, filter: true },
-		{ field: 'city', width: 120, filter: true },
-		{ field: 'email', width: 150, filter: true },
-        { field: 'phone', width: 150, filter: true },
-	]);
+    const [colDefs] = useState<ColDef<Customer>[]>([
+        { field: 'firstname', sortable: true, filter: true },
+        { field: 'lastname', sortable: true, filter: true },
+        { field: 'streetaddress', sortable: true, filter: true },
+        { field: 'postcode', sortable: true, filter: true },
+        { field: 'city', sortable: true, filter: true },
+        { field: 'email', sortable: true, filter: true },
+        { field: 'phone', sortable: true, filter: true },
+    ]);
 
     useEffect(() => {
         fetch(`${apiUrl}/customers`)
@@ -43,17 +33,16 @@ export default function CustomerList() {
     }, []);
 
     return (
-        <>
-            <div style={{ width: '90%', height: 500 }}>
-                <h2>Customers</h2>
-				<AgGridReact
-					columnDefs={columnDefs}
-					rowData={customers}
-					pagination={true}
-					paginationAutoPageSize={true}
-					theme={themeMaterial}
-				/>
-			</div>
-        </>
+        <div style={{ width: '90%', height: 500 }}>
+            <h2>Customers</h2>
+            <AgGridReact
+                columnDefs={colDefs}
+                rowData={customers}
+                pagination={true}
+                paginationAutoPageSize={true}
+                animateRows={true}
+                theme={themeMaterial}
+            />
+        </div>
     );
 }
