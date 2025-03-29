@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const apiUrl = import.meta.env.VITE_API_TRAINING_CUSTOMER_URL;
 
 
 
@@ -25,53 +25,30 @@ export default function TrainingList() {
         { field: 'activity', sortable: true, filter: true },
         {
             field: 'customer', sortable: true, filter: true,
-            // Render the customer as a string
-            valueFormatter: (params) => `${params.value.firstname} ${params.value.lastname}`
+            valueFormatter: (params) => params.value?.firstname + " " + params.value?.lastname,
         },
     ]);
 
     useEffect(() => {
-        fetchTrainings();
+        fetchTrainingsWithCustomer();
     }, []);
 
-    const fetchTrainings = () => {
-        fetch(`${apiUrl}/trainings`)
+    const fetchTrainingsWithCustomer = () => {
+        fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Error when fetching trainings');
+                    throw new Error('Error when fetching trainings with customers');
                 }
-                return response.json();
+                return response.json()
             })
             .then(data => {
-                // Loop through the trainings and fetch the customer for each training
-                Promise.all(data._embedded.trainings.map(async (training: any) => {
-                    const customer = await getCustomerFromTraining(training._links.customer.href);
-                    if (customer) {
-                        training.customer = customer;
-                    }
-                    // Return the updated training object
-                    return training;
-                })).then((updatedTrainings) => {
-                    // Update state after all customers are fetched
-                    setTrainings(updatedTrainings);
-                });
-
-            })
-            .catch(error => console.error(error));
-    }
-
-    const getCustomerFromTraining = async (url: string) => {
-        return fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error when fetching customer');
-                }
-                return response.json();
+                setTrainings(data);
             })
             .catch(error => {
-                console.error(error);
+                console.error('Error fetching trainings:', error);
             });
     }
+
 
 
     return (
