@@ -24,15 +24,15 @@ function App() {
 
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth='xl'>
       {/* Top AppBar */}
-      <AppBar position="absolute">
+      <AppBar>
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" onClick={() => setOpen(true)}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6">
-            Training Management
+            PersonalTrainer
           </Typography>
         </Toolbar>
         <CssBaseline />
