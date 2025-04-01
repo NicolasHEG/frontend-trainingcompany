@@ -51,7 +51,7 @@ export default function TrainingList() {
 
 
   return (
-    <div style={{ width: '100%', height: 600 }}>
+    <div style={{ width: '100%', height: 500 }}>
       <h2>Trainings</h2>
       <AgGridReact
         columnDefs={colDefs}
