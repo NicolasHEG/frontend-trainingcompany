@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry, ColDef, themeMaterial } from 'ag-grid-community';
 import { Customer } from '../types';
-import { fetchCustomers } from '../api';
+import { fetchCustomersApi } from '../api';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
 
+  // Definition of the column for the grod
   const [colDefs] = useState<ColDef<Customer>[]>([
     { field: 'firstname', sortable: true, filter: true },
     { field: 'lastname', sortable: true, filter: true },
@@ -20,10 +21,18 @@ export default function CustomerList() {
   ]);
 
   useEffect(() => {
-    fetchCustomers()
+    fetchCustomers();
+  }, []);
+
+  /**
+   * Retrieve the customers
+   */
+  const fetchCustomers = () => {
+    // API call to fetch the customers
+    fetchCustomersApi()
       .then(data => setCustomers(data._embedded.customers))
       .catch(error => console.error(error));
-  }, []);
+  }
 
   return (
     <div style={{ width: '100%', height: 500 }}>

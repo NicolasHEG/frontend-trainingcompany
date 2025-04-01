@@ -8,7 +8,7 @@ const apiTrainingsUrl = import.meta.env.VITE_API_TRAINING_CUSTOMER_URL;
  * 
  * @returns Customers
  */
-export const fetchCustomers = async () => {
+export const fetchCustomersApi = async () => {
   return fetch(`${apiBaseUrl}/customers`)
   .then((response) => {
     if (!response.ok) {
