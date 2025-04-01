@@ -16,14 +16,14 @@ export default function TrainingList() {
   // Define the column definitions for the grid
   const [colDefs] = useState<ColDef<Training>[]>([
     {
-      field: 'date', sortable: true, filter: 'agDateColumnFilter',
+      field: 'date', sortable: true, filter: 'agDateColumnFilter', flex: 1,
       // format the date as a string with the format 'DD.MM.YYYY hh:mm'
-      valueFormatter: (params) => dayjs(params.value as string).format('DD.MM.YYYY hh:mm')
+      valueFormatter: (params) => dayjs(params.value as string).format('DD.MM.YYYY HH:mm')
     },
-    { field: 'duration', sortable: true, filter: true },
-    { field: 'activity', sortable: true, filter: true },
+    { field: 'duration', sortable: true, filter: true, flex: 1 },
+    { field: 'activity', sortable: true, filter: true, flex: 1 },
     {
-      field: 'customer', sortable: true, filter: true,
+      field: 'customer', sortable: true, filter: true, flex: 1,
       // format the customer field by concatenating the firstname and lastname
       valueFormatter: (params) => params.value?.firstname + " " + params.value?.lastname,
     },
@@ -49,7 +49,7 @@ export default function TrainingList() {
 
 
   return (
-    <div style={{ width: '100%', height: 500 }}>
+    <div style={{ width: '100%', height: 600 }}>
       <h2>Trainings</h2>
       <AgGridReact
         columnDefs={colDefs}
