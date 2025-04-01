@@ -17,8 +17,10 @@ export default function TrainingList() {
   const [colDefs] = useState<ColDef<Training>[]>([
     {
       field: 'date', sortable: true, filter: 'agDateColumnFilter', flex: 1,
-      // format the date as a string with the format 'DD.MM.YYYY hh:mm'
-      valueFormatter: (params) => dayjs(params.value as string).format('DD.MM.YYYY HH:mm')
+      // format the date as a string with the format 'DD.MM.YYYY HH:mm'
+      valueFormatter: (params) => dayjs(params.value as string).format('DD.MM.YYYY HH:mm'),
+      // Value kept to a date object for the filter to work
+      valueGetter: (params) => dayjs(params.data?.date as string).toDate(),
     },
     { field: 'duration', sortable: true, filter: true, flex: 1 },
     { field: 'activity', sortable: true, filter: true, flex: 1 },
