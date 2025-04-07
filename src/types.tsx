@@ -5,7 +5,9 @@ export type Training = {
     customer: string;
 };
 
-export type Customer = {
+export type Customer = Omit<CustomerFullData, "_links">;
+
+export type CustomerFullData = {
     firstname: string;
     lastname: string;
     streetaddress: string;
@@ -13,4 +15,10 @@ export type Customer = {
     city: string;
     email: string;
     phone: string;
-};
+    _links: {
+        self: { href: string };
+        customer: { href: string };
+        trainings: { href: string };
+    };
+
+}
