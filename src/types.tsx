@@ -5,6 +5,13 @@ export type Training = {
     customer: string;
 };
 
+export type TrainingAdd = {
+    date: string;
+    duration: string;
+    activity: string;
+    customer: string;
+}
+
 export type Customer = Omit<CustomerFullData, "_links">;
 
 export type CustomerFullData = {

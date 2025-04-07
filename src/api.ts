@@ -1,10 +1,10 @@
-import { Customer } from "./types";
+import { Customer, TrainingAdd } from "./types";
 
 /**
  * API Urls
  */
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-const apiTrainingsUrl = import.meta.env.VITE_API_TRAINING_CUSTOMER_URL;
+const apiTrainingsWithCustomerUrl = import.meta.env.VITE_API_TRAINING_CUSTOMER_URL;
 
 /**
  * * Retrieve all customers
@@ -24,7 +24,7 @@ export const fetchCustomersApi = () => {
  * @returns The trainings with customer informations
  */
 export const fetchTrainingsWithCustomer = () => {
-  return fetch(apiTrainingsUrl).then((response) => {
+  return fetch(apiTrainingsWithCustomerUrl).then((response) => {
     if (!response.ok) {
       throw new Error("Error when fetching trainings with customers");
     }
@@ -83,6 +83,27 @@ export const deleteCustomerApi = (url: string) => {
   }).then((response) => {
     if (!response.ok) {
       throw new Error("Error when deleting customer");
+    }
+    return response.json();
+  });
+};
+
+
+/**
+ * * Add a training for a customer
+ * @param training The training to add
+ * @returns Added training
+ */
+export const addTrainingApi = (training: TrainingAdd) => {
+  return fetch(`${apiBaseUrl}/trainings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(training),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("Error when adding training");
     }
     return response.json();
   });

@@ -6,6 +6,7 @@ import { fetchCustomersApi, deleteCustomerApi } from '../api';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
 import { Button, Snackbar } from '@mui/material';
+import AddTraining from './AddTraining';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -22,6 +23,11 @@ export default function CustomerList() {
     { field: 'city', sortable: true, filter: true },
     { field: 'email', sortable: true, filter: true },
     { field: 'phone', sortable: true, filter: true },
+    {
+      width: 80,
+      cellRenderer: (params: ICellRendererParams) =>
+        <AddTraining customer={params.data} />
+    },
     {
       width: 80,
       cellRenderer: (params: ICellRendererParams) =>
