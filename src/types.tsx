@@ -1,10 +1,19 @@
+/**
+ * Type used when retrieving a training with customer information
+ * @param customer Concatenated firstname and lastname of the customer
+ */
 export type Training = {
+    id: number;
     date: string;
     duration: number;
     activity: string;
     customer: string;
 };
 
+/**
+ * Type used to add a training
+ * @param customer Customer URL
+ */
 export type TrainingAdd = {
     date: string;
     duration: string;
@@ -14,6 +23,9 @@ export type TrainingAdd = {
 
 export type Customer = Omit<CustomerFullData, "_links">;
 
+/**
+ * Complete customer data type
+ */
 export type CustomerFullData = {
     firstname: string;
     lastname: string;

@@ -6,6 +6,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from "dayjs";
 import { addTrainingApi } from "../api";
+import AddIcon from '@mui/icons-material/Add';
+
 
 type AddTrainingProps = {
     customer: CustomerFullData
@@ -42,8 +44,8 @@ export default function AddTraining(props: AddTrainingProps) {
 
     return (
         <>
-            <IconButton size="small" onClick={handleClickOpen}>
-                +
+            <IconButton onClick={handleClickOpen}>
+                <AddIcon fontSize="small" color="success" />
             </IconButton>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Add Training for {props.customer.firstname} {props.customer.lastname}</DialogTitle>

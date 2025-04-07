@@ -108,3 +108,19 @@ export const addTrainingApi = (training: TrainingAdd) => {
     return response.json();
   });
 };
+
+/**
+ * * Delete a training by its id
+ * @param url The url of the training to delete
+ * @returns Deleted training
+ */
+export const deleteTrainingApi = (id: number) => {
+  return fetch(`${apiBaseUrl}/trainings/${id}`, {
+    method: "DELETE",
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("Error when deleting training");
+    }
+    return response.json();
+  });
+}

@@ -1,6 +1,7 @@
 import TextField from '@mui/material/TextField';
 import { Customer } from '../types';
 
+// Type composed of Custoemr object and function to set the customer
 type CustomerFormProps = {
     customer: Customer;
     setCustomer: (customer: Customer) => void;

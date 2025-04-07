@@ -5,8 +5,9 @@ import { Customer } from '../types';
 import { fetchCustomersApi, deleteCustomerApi } from '../api';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
-import { Button, Snackbar } from '@mui/material';
+import { Button, IconButton, Snackbar } from '@mui/material';
 import AddTraining from './AddTraining';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -16,35 +17,34 @@ export default function CustomerList() {
 
   // Definition of the column for the grod
   const [colDefs] = useState<ColDef<Customer>[]>([
-    { field: 'firstname', sortable: true, filter: true },
-    { field: 'lastname', sortable: true, filter: true },
-    { field: 'streetaddress', sortable: true, filter: true },
-    { field: 'postcode', sortable: true, filter: true },
-    { field: 'city', sortable: true, filter: true },
-    { field: 'email', sortable: true, filter: true },
-    { field: 'phone', sortable: true, filter: true },
+    { field: 'firstname', sortable: true, filter: true, flex: 1 },
+    { field: 'lastname', sortable: true, filter: true, flex: 1 },
+    { field: 'streetaddress', sortable: true, filter: true, flex: 1 },
+    { field: 'postcode', sortable: true, filter: true, flex: 1 },
+    { field: 'city', sortable: true, filter: true, flex: 1 },
+    { field: 'email', sortable: true, filter: true, flex: 1 },
+    { field: 'phone', sortable: true, filter: true, flex: 1 },
     {
-      width: 80,
+      flex: 0.5,
       cellRenderer: (params: ICellRendererParams) =>
         <AddTraining customer={params.data} />
     },
     {
-      width: 80,
+      flex: 0.5,
       cellRenderer: (params: ICellRendererParams) =>
         <EditCustomer customer={params.data} fetchCustomers={fetchCustomers} />
     },
     {
-      width: 80,
+      flex: 0.5,
       cellRenderer: (params: ICellRendererParams) =>
-        <Button
+        <IconButton
           size='small'
           color='error'
           onClick={() => handleDelete(params)}
         >
-          Delete
-        </Button>
+          <DeleteIcon fontSize='small' />
+        </IconButton>
     },
-
   ]);
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -7,6 +6,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CustomerAddEditForm from './CustomerAddEditForm';
 import { Customer, CustomerFullData } from '../types';
 import { editCustomerApi } from '../api';
+import { Button, IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 type EditCustomerProps = {
     customer: CustomerFullData;
@@ -39,9 +40,9 @@ export default function EditCustomer(props: EditCustomerProps) {
 
     return (
         <>
-            <Button size="small" onClick={handleClickOpen}>
-                Edit
-            </Button>
+            <IconButton onClick={handleClickOpen}>
+                <EditIcon fontSize="small" color="primary" />
+            </IconButton>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Edit customer</DialogTitle>
                 <DialogContent>
