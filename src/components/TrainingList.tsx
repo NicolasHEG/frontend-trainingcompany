@@ -4,7 +4,7 @@ import { AllCommunityModule, ModuleRegistry, ColDef, themeMaterial, ICellRendere
 import { Training } from '../types';
 import dayjs from "dayjs";
 import { fetchTrainingsWithCustomer, deleteTrainingApi } from '../api';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
