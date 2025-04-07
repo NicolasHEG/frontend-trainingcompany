@@ -20,6 +20,7 @@ export default function AddCustomer(props: AddCustomerProps) {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setCustomer({} as Customer);
   };
 
   const handleClose = () => {
@@ -37,10 +38,6 @@ export default function AddCustomer(props: AddCustomerProps) {
         fetchCustomers();
       })
       .catch(error => console.error(error))
-      .finally(() => {
-        // Reset the customer object to empty the form after adding
-        setCustomer({} as Customer);
-      });
   };
 
   return (
@@ -59,7 +56,7 @@ export default function AddCustomer(props: AddCustomerProps) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={addCustomer}>Save</Button>
+          <Button onClick={() => addCustomer()}>Save</Button>
         </DialogActions>
       </Dialog>
     </>

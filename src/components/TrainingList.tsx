@@ -7,8 +7,6 @@ import { fetchTrainingsWithCustomer } from '../api';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-
-
 export default function TrainingList() {
   // List of trainings
   const [trainings, setTrainings] = useState<Training[]>([]);

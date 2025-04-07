@@ -32,15 +32,9 @@ export default function EditCustomer(props: EditCustomerProps) {
     const handleSave = () => {
         // API call to update the customer
         editCustomerApi(customer, props.customer._links.self.href)
-            .then(() => {
-                handleClose();
-                props.fetchCustomers();
-            })
+            .then(() => props.fetchCustomers())
             .catch(error => console.error(error))
-            .finally(() => {
-                // Reset the customer object to empty the form after adding
-                setCustomer({} as Customer);
-            });
+            .finally(() => handleClose());
     };
 
     return (

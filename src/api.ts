@@ -10,7 +10,7 @@ const apiTrainingsUrl = import.meta.env.VITE_API_TRAINING_CUSTOMER_URL;
  * * Retrieve all customers
  * @returns Customers
  */
-export const fetchCustomersApi = async () => {
+export const fetchCustomersApi = () => {
   return fetch(`${apiBaseUrl}/customers`).then((response) => {
     if (!response.ok) {
       throw new Error("Error when fetching customers");
@@ -23,7 +23,7 @@ export const fetchCustomersApi = async () => {
  * * Retrieve all trainings with customer informations
  * @returns The trainings with customer informations
  */
-export const fetchTrainingsWithCustomer = async () => {
+export const fetchTrainingsWithCustomer = () => {
   return fetch(apiTrainingsUrl).then((response) => {
     if (!response.ok) {
       throw new Error("Error when fetching trainings with customers");
@@ -37,7 +37,7 @@ export const fetchTrainingsWithCustomer = async () => {
  * @param customer The customer to add
  * @returns Added customer
  */
-export const addCustomerApi = async (customer: Customer) => {
+export const addCustomerApi = (customer: Customer) => {
   return fetch(`${apiBaseUrl}/customers`, {
     method: "POST",
     headers: {
@@ -57,7 +57,7 @@ export const addCustomerApi = async (customer: Customer) => {
  * @param customer The customer to edit
  * @returns Edited customer
  */
-export const editCustomerApi = async (customer: Customer, url: string) => {
+export const editCustomerApi = (customer: Customer, url: string) => {
   return fetch(url, {
     method: "PUT",
     headers: {
@@ -67,6 +67,22 @@ export const editCustomerApi = async (customer: Customer, url: string) => {
   }).then((response) => {
     if (!response.ok) {
       throw new Error("Error when updating customer");
+    }
+    return response.json();
+  });
+};
+
+/**
+ * * Delete a customer
+ * @param url The url of the customer to delete
+ * @returns Deleted customer
+ */
+export const deleteCustomerApi = (url: string) => {
+  return fetch(url, {
+    method: "DELETE",
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("Error when deleting customer");
     }
     return response.json();
   });
