@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Customer } from '../types';
@@ -28,11 +27,12 @@ export default function AddCustomer(props: AddCustomerProps) {
   };
 
   /**
-   * Add a customer to the database
+   * Add a new customer to the database
+   * @param newCustomer customer to be added
    */
-  const addCustomer = () => {
+  const addCustomer = (newCustomer: Customer) => {
     // API call to add the customer
-    addCustomerApi(customer)
+    addCustomerApi(newCustomer)
       .then(() => {
         handleClose();
         fetchCustomers();
@@ -52,12 +52,8 @@ export default function AddCustomer(props: AddCustomerProps) {
         <DialogTitle>Add a new customer</DialogTitle>
         <DialogContent>
           {/* Call separate component containing form */}
-          <CustomerAddEditForm customer={customer} setCustomer={setCustomer} />
+          <CustomerAddEditForm customer={customer} setCustomer={setCustomer} onSave={addCustomer} onCancel={handleClose}/>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={() => addCustomer()}>Save</Button>
-        </DialogActions>
       </Dialog>
     </>
   );

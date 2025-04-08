@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import CustomerAddEditForm from './CustomerAddEditForm';
 import { Customer, CustomerFullData } from '../types';
 import { editCustomerApi } from '../api';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
 type EditCustomerProps = {
@@ -30,9 +29,13 @@ export default function EditCustomer(props: EditCustomerProps) {
         setOpen(false);
     };
 
-    const handleSave = () => {
+    /**
+     * Update an edited customer in the database
+     * @param editedCustomer customer to be updated
+     */
+    const handleSave = (editedCustomer: Customer) => {
         // API call to update the customer
-        editCustomerApi(customer, props.customer._links.self.href)
+        editCustomerApi(editedCustomer, props.customer._links.self.href)
             .then(() => props.fetchCustomers())
             .catch(error => console.error(error))
             .finally(() => handleClose());
@@ -47,12 +50,8 @@ export default function EditCustomer(props: EditCustomerProps) {
                 <DialogTitle>Edit customer</DialogTitle>
                 <DialogContent>
                     {/* Call separate component containing form for edition */}
-                    <CustomerAddEditForm customer={customer} setCustomer={setCustomer} />
+                    <CustomerAddEditForm customer={customer} setCustomer={setCustomer} onSave={handleSave} onCancel={handleClose} />
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSave}>Save</Button>
-                </DialogActions>
             </Dialog>
         </>
     );
