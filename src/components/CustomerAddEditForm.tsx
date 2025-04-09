@@ -37,8 +37,6 @@ export default function CustomerAddEditForm({ customer, setCustomer, onSave, onC
             //Regex to check if the field is empty or contains only spaces
         } else if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
             error = 'Invalid email format';
-        } else if (name === 'phone' && !/^\d+$/.test(value)) {
-            error = 'Phone must contain only numbers';
         }
         setErrors((prev) => ({ ...prev, [name]: error }));
         return error;

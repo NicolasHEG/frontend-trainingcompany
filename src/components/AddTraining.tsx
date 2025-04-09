@@ -78,6 +78,7 @@ export default function AddTraining(props: AddTrainingProps) {
                             value={training.date ? dayjs(training.date) : null}
                             onChange={(trainingDate) => setTraining({ ...training, date: trainingDate?.toISOString() || '' })}
                             ampm={false} // 24-hour format
+                            // slotPrors is used to pass props to the TextField component
                             slotProps={{ textField: { fullWidth: true, error: errors.date, helperText: errors.date ? "Date is required" : "" } }}
                         />
                     </LocalizationProvider>
