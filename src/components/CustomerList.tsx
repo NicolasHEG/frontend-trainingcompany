@@ -1,19 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry, ColDef, themeMaterial, ICellRendererParams } from 'ag-grid-community';
 import { Customer } from '../types';
 import { fetchCustomersApi, deleteCustomerApi } from '../api';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
-import { IconButton, Snackbar } from '@mui/material';
+import { Button, IconButton, Snackbar } from '@mui/material';
 import AddTraining from './AddTraining';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function CustomerList() {
     const [customers, setCustomers] = useState([]);
     const [open, setOpen] = useState(false);
+    const gridRef = useRef<AgGridReact>(null);
 
     // Definition of the column for the grod
     const [colDefs] = useState<ColDef<Customer>[]>([
@@ -74,11 +76,35 @@ export default function CustomerList() {
         }
     }
 
+    /**
+     * Download the CSV file
+     */
+    // memorize the function to avoid unnecessary re-renders
+    const exportCsv = useCallback(() => {
+        const params = {
+            fileName: 'customers.csv',
+            // Automapping colnames but could be an array of string manually defined [""firstname", "lastname", ...]
+            columnKeys: colDefs
+                // Only include columns with a field property
+                .filter(col => col.field)
+                .map(col => col.field as string),
+        };
+        gridRef.current!.api.exportDataAsCsv(params);
+    }, [colDefs]);
+
     return (
         <>
             <div style={{ width: '100%', height: 500 }}>
                 <h2>Customers</h2>
                 <AddCustomer fetchCustomers={fetchCustomers} />
+                {/* csv export of customers */}
+                <IconButton
+                    size='medium'
+                    color='default'
+                    onClick={exportCsv}
+                >
+                    <FileDownloadIcon fontSize='inherit' />
+                </IconButton>
                 <AgGridReact
                     rowData={customers}
                     columnDefs={colDefs}
@@ -86,6 +112,7 @@ export default function CustomerList() {
                     paginationAutoPageSize={true}
                     animateRows={true}
                     theme={themeMaterial}
+                    ref={gridRef}
                 />
             </div>
             <Snackbar
