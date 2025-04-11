@@ -5,7 +5,7 @@ import { Customer } from '../types';
 import { fetchCustomersApi, deleteCustomerApi } from '../api';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
-import { Button, IconButton, Snackbar } from '@mui/material';
+import { IconButton, Snackbar } from '@mui/material';
 import AddTraining from './AddTraining';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';

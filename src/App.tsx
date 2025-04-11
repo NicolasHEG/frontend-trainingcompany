@@ -15,6 +15,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import PeopleIcon from '@mui/icons-material/People';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -64,6 +65,14 @@ function App() {
                                 <FitnessCenterIcon />
                             </ListItemIcon>
                             <ListItemText primary="Trainings" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem component={Link} to="/calendar">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <CalendarMonthIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Calendar of trainings" />
                         </ListItemButton>
                     </ListItem>
                 </List>
