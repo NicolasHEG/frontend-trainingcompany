@@ -85,7 +85,7 @@ export default function CustomerList() {
             fileName: 'customers.csv',
             // Automapping colnames but could be an array of string manually defined [""firstname", "lastname", ...]
             columnKeys: colDefs
-                // Only include columns with a field property
+                // Only include columns with a field property. This excludes the action columns with buttons or other components.
                 .filter(col => col.field)
                 .map(col => col.field as string),
         };
@@ -98,13 +98,22 @@ export default function CustomerList() {
                 <h2>Customers</h2>
                 <AddCustomer fetchCustomers={fetchCustomers} />
                 {/* csv export of customers */}
-                <IconButton
-                    size='medium'
-                    color='default'
-                    onClick={exportCsv}
-                >
-                    <FileDownloadIcon fontSize='inherit' />
-                </IconButton>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+                    <IconButton
+                        size='medium'
+                        color='primary'
+                        onClick={exportCsv}
+                        style={{
+                            borderRadius: '4px',
+                            padding: '8px 16px',
+                            border: '1px solid #1976d2',
+                            gap: '8px',
+                        }}
+                    >
+                        <FileDownloadIcon fontSize='small' />
+                        <span style={{ fontSize: '14px' }}>Export CSV</span>
+                    </IconButton>
+                </div>
                 <AgGridReact
                     rowData={customers}
                     columnDefs={colDefs}
