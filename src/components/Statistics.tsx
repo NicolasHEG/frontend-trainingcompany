@@ -3,11 +3,6 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { fetchTrainingsWithCustomer } from '../api';
 import { Training } from '../types';
 
-type TrainingDurationByActivity = {
-  activity: string;
-  totalDuration: number;
-};
-
 
 export default function Statistics() {
   const [activities, setActivities] = useState<string[]>([]);
