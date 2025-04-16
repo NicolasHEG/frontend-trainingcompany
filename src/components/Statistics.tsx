@@ -45,6 +45,8 @@ export default function Statistics() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start', gap: '40px' }}>
+      
+      {/* First chart for total duration of trainings activities */}
       <div style={{ textAlign: 'center' }}>
       <h2 style={{ marginBottom: '30px' }}>Total duration of trainings activities</h2>
       <BarChart
@@ -56,6 +58,8 @@ export default function Statistics() {
         sx={{ backgroundColor: '#f0f8ff', borderRadius: '12px', padding: '20px' }}
       />
       </div>
+      
+      {/* Second chart for number of training per week days */}
       <div style={{ textAlign: 'center' }}>
       <h2 style={{ marginBottom: '30px'}}>Trending days for training</h2>
       <BarChart
