@@ -19,6 +19,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -73,6 +74,14 @@ function App() {
                                 <CalendarMonthIcon />
                             </ListItemIcon>
                             <ListItemText primary="Calendar of trainings" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem component={Link} to="/statistics">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <BarChartIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Statistics" />
                         </ListItemButton>
                     </ListItem>
                 </List>
