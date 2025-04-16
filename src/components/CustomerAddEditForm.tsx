@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Customer } from '../types';
@@ -62,7 +62,7 @@ export default function CustomerAddEditForm({ customer, setCustomer, onSave, onC
      * Handle change event for input fields
      * @param event change event
      */
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setCustomer({ ...customer, [name]: value });
         validateField(name, value);
